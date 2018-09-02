@@ -57,8 +57,17 @@ def two_hundred_code():
     """
     total_num = 200  # todo 总共生成200个随机码
     number = 12  # todo 每一个随机码多少字符
+    data = ""
     for i in range(total_num):
-        print("number: {}, result: {}".format(i+1, random_str(number)))
+        # print("number: {}, result: {}".format(i+1, random_str(number)))
+        data += "number:{}, result: {} \n".format(i+1, random_str(number))
+
+    return data
+# two_hundred_code()  # todo 调用函数
 
 
-two_hundred_code()  # todo 调用函数
+# todo 把生成的随机码保存到文件 coupondata.txt 中
+print(two_hundred_code())  # todo 打印结果
+
+with open("coupondata.txt", 'w') as f:
+    f.write(two_hundred_code())
