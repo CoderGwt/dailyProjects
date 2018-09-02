@@ -1,1 +1,1 @@
-# dayliProjects
+# dailyProjects
