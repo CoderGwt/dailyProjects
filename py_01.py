@@ -1,4 +1,5 @@
 # !/usr/bin/python
+import pymysql
 """
 第 0001 题： 做为 Apple Store App 独立开发者，你要搞限时促销，
     为你的应用生成激活码（或者优惠券），使用 Python 如何生成 200 个激活码（或者优惠券）？
@@ -7,6 +8,12 @@
     1.结果类似：3FSNMKHUA9GG；由12为字符组成，字符包括数字和大写字母。随机生成
         使用string模块可以直接生成A-Z和0-9 一大串字符
     2.使用random模块 和 string模块
+
+
+第 0002 题：将 0001 题生成的 200 个激活码（或者优惠券）保存到 MySQL 关系型数据库中
+    1.数据库mydb
+    2.表coupondata
+    3.id自增，字段 content。
 
 """
 # FileName: py_01.py
@@ -38,6 +45,18 @@ print(string.ascii_uppercase + string.digits)  # todo 生成A-Z0-9一大串字�
 print("*" * 100)
 
 
+# todo 把生成的随机码保存到数据库mysql中
+# todo 1. 配置mysql
+connect = pymysql.connect(
+    user="username",
+    password="password",
+    host="127.0.0.1",
+    port=3306,
+    db="db name")
+# todo 2.创建游标
+cursor = connect.cursor()
+
+
 def random_str(number):
     """
         生成随机码
@@ -59,15 +78,24 @@ def two_hundred_code():
     number = 12  # todo 每一个随机码多少字符
     data = ""
     for i in range(total_num):
-        # print("number: {}, result: {}".format(i+1, random_str(number)))
+        print("number: {}, result: {}".format(i+1, random_str(number)))
         data += "number:{}, result: {} \n".format(i+1, random_str(number))
+
+        # todo 3. 插入数据到数据库中
+        cursor.execute("insert into coupondata(content) values('%s')" % (random_str(number)))
+        connect.commit()  # todo 切记要提交
+        # data += random_str(number)
 
     return data
 # two_hundred_code()  # todo 调用函数
 
 
 # todo 把生成的随机码保存到文件 coupondata.txt 中
-print(two_hundred_code())  # todo 打印结果
-
+# print(two_hundred_code())  # todo 打印结果
+# two_hundred_code()
 with open("coupondata.txt", 'w') as f:
     f.write(two_hundred_code())
+
+
+cursor.close()
+connect.close()
