@@ -48,11 +48,11 @@ print("*" * 100)
 # todo 把生成的随机码保存到数据库mysql中
 # todo 1. 配置mysql
 connect = pymysql.connect(
-    user="username",
-    password="password",
+    user="root",
+    password="guoweitao",
     host="127.0.0.1",
     port=3306,
-    db="db name")
+    db="mydb")
 # todo 2.创建游标
 cursor = connect.cursor()
 
@@ -76,13 +76,15 @@ def two_hundred_code():
     """
     total_num = 200  # todo 总共生成200个随机码
     number = 12  # todo 每一个随机码多少字符
-    data = ""
+    data = ""  # todo 保存最终的所有值
     for i in range(total_num):
-        print("number: {}, result: {}".format(i+1, random_str(number)))
-        data += "number:{}, result: {} \n".format(i+1, random_str(number))
+
+        code = random_str(number)
+        print("number: {}, result: {}".format(i+1, code))
+        data += "number:{}, result: {} \n".format(i+1, code)
 
         # todo 3. 插入数据到数据库中
-        cursor.execute("insert into coupondata(content) values('%s')" % (random_str(number)))
+        cursor.execute("insert into coupondata(content) values('%s')" % code)
         connect.commit()  # todo 切记要提交
         # data += random_str(number)
 
