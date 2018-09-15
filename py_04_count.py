@@ -15,4 +15,12 @@ with open("test.txt") as f:
         # todo 把每一个添加到字典里面，获取不到值，就设置为0，并加一；实现统计结果
         dic[i] = dic.get(i, 0) + 1
 
-print(dic)
+# print(dic)
+
+for key, value in dic.items():
+    if key != " " and key != "\n":
+        print("%s: %s" % (key, value))
+
+print(list(dic.items()))
+
+
