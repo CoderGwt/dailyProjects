@@ -48,11 +48,11 @@ print("*" * 100)
 # todo 把生成的随机码保存到数据库mysql中
 # todo 1. 配置mysql
 connect = pymysql.connect(
-    user="root",
-    password="guoweitao",
-    host="127.0.0.1",
+    user="username",
+    password="password",
+    host="host",
     port=3306,
-    db="mydb")
+    db="dbname")
 # todo 2.创建游标
 cursor = connect.cursor()
 
