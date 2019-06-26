@@ -13,7 +13,7 @@ def welcome():
     print("1. 新建名片")
     print("2. 显示全部")
     print("3. 查询名片")
-    print("4. 保存名片")
+    # print("4. 保存名片")
     print("5. 删除名片\n")
     print("0. 退出系统")
     print(("*" * 50))
@@ -195,19 +195,22 @@ def save_msg():
     """
         保存学生信息，写到一个文件里面
     """
-    with open("student.data", 'w') as msg:
-        msg.write(str(cards_msg) + "\n")
+    with open("student.data", 'w+') as f:
+        for msg in cards_msg:
+            f.write(str(msg) + "\n")
 
 
 def read_student_msg():
     """
         一开始先把之前保存的数据加载到列表中
     """
+    import json
     global cards_msg
     try:
         with open("student.data") as msg:
-            content = msg.read()
-            cards_msg = content
+            content = msg.read().split("\n")[:-1]
+            for item in content:
+                cards_msg.append(json.loads(item.replace("'", '"')))
     except IOError:
         pass
     else:
