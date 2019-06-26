@@ -25,3 +25,6 @@ if __name__ == '__main__':
             break
         else:
             print("你输入的不正确，请重新选择！")
+
+# with open("student.data") as msg:
+#     print(msg.read().split("\n")[:-1])
