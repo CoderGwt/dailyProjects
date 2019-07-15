@@ -28,6 +28,6 @@ for key, value in dic.items():
 # todo 打印出排名前三的
 dic_list = dic.items()
 print(type(dic_list))
-for i, num in sorted(dic_list, key=lambda x:x[1], reverse=True)[:3]:
+for i, num in sorted(dic_list, key=lambda x: x[1], reverse=True)[:3]:
     if i != "\n":
         print("%s count is %s " % (i, num))
